@@ -1,0 +1,48 @@
+# rasax specific settings
+rasax:
+    # initialUser is the user which is created upon the initial start of Rasa X
+    initialUser:
+        # password for the Rasa X user
+        password: "123456"
+    # passwordSalt Rasa X uses to salt the user passwords
+    passwordSalt: "123456"
+    # token Rasa X accepts as authentication token from other Rasa services
+    token: "123456"
+    # jwtSecret which is used to sign the jwtTokens of the users
+    jwtSecret: "123456"
+    tag: "0.32.2"
+# rasa: Settings common for all Rasa containers
+rasa:
+    tag: "2.0.0"
+    # token Rasa accepts as authentication token from other Rasa services
+    token: "123456"
+# RabbitMQ specific settings
+rabbitmq:
+    # rabbitmq settings of the subchart
+    rabbitmq:
+        # password which is used for the authentication
+        password: "123456"
+# global settings of the used subcharts
+global:
+    # postgresql: global settings of the postgresql subchart
+    postgresql:
+        # postgresqlPassword is the password which is used when the postgresqlUsername equals "postgres"
+        postgresqlPassword: "123456"
+    # redis: global settings of the postgresql subchart
+    redis:
+        # password to use in case there no external secret was provided
+        password: "123456"
+# app (custom action server) specific settings
+app:
+    # name of the custom action server image to use
+    name: "rasa-bot"
+    # tag refers to the custom action server image tag
+    tag: "0.0.1"
+    extraEnvs:
+        ES_HOST: "https://example.com:9200"
+        ES_USERNAME: "rasa"
+        ES_PASSWORD: "123456"
+
+images:
+    # required to load local app image, unfortunately global setting
+    pullPolicy: "Never"

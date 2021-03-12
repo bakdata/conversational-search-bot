@@ -1,0 +1,4 @@
+rasa
+elasticsearch
+pytablewriter
+spacy==2.3.5

@@ -1,0 +1,22 @@
+version: "2.0"
+rules:
+  - rule: greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+  - rule: goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+  - rule: query books
+    steps:
+      - intent: query_books
+      - action: action_query_knowledge_base
+  - rule: query movies
+    steps:
+      - intent: query_movies
+      - action: action_query_knowledge_base
+  - rule: know more
+    steps:
+      - intent: know_more
+      - action: action_query_knowledge_base

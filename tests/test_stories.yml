@@ -1,0 +1,200 @@
+#### This file contains tests to evaluate that your bot behaves as expected.
+#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+version: "2.0"
+stories:
+  - story: query science fiction summary
+    steps:
+    - intent: greet
+      user: |-
+        good morning
+    - action: utter_greet
+    - intent: query_books
+      user: |-
+        do you have [science fiction](genres) [books]{"entity": "object_type", "value": "book"}
+    - slot_was_set:
+      - object_type: book
+    - slot_was_set:
+      - genres: science fiction
+    - action: action_query_knowledge_base
+    - intent: know_more
+      user: |-
+        give a [summary](attribute) of the [last one]{"entity": "mention", "value": "LAST"}
+    - slot_was_set:
+      - mention: LAST
+    - slot_was_set:
+      - attribute: summary
+    - action: action_query_knowledge_base
+
+  - story: query history summary
+    steps:
+    - intent: greet
+      user: |-
+        heyho
+    - action: utter_greet
+    - intent: query_books
+      user: |-
+        i would like to read a [history](genres) [novel]{"entity": "object_type", "value": "book"}
+    - slot_was_set:
+        - object_type: book
+    - slot_was_set:
+        - genres: history
+    - action: action_query_knowledge_base
+    - intent: know_more
+      user: |-
+        please provide the [summary](attribute) of the [third one]{"entity": "mention", "value": "3"}
+    - slot_was_set:
+        - mention: 3
+    - slot_was_set:
+        - attribute: summary
+    - action: action_query_knowledge_base
+
+  - story: query novel
+    steps:
+    - intent: greet
+      user: |-
+        good morning
+    - action: utter_greet
+    - intent: query_books
+      user: |-
+        i would like to read a [novel]{"entity": "object_type", "value": "book"} by [George Orwell](author)
+    - slot_was_set:
+        - object_type: book
+    - slot_was_set:
+        - author: George Orwell
+    - action: action_query_knowledge_base
+    - intent: know_more
+      user: |-
+        please [summarize]{"entity": "attribute", "value": "summary"} of the [last one]{"entity": "mention", "value": "LAST"}
+    - slot_was_set:
+        - mention: LAST
+    - slot_was_set:
+        - attribute: summary
+    - action: action_query_knowledge_base
+
+  - story: query novels and their author
+    steps:
+    - intent: greet
+      user: |-
+        good morning
+    - action: utter_greet
+    - intent: query_books
+      user: |-
+        please show me [historic]{"entity": "genres", "value": "history"} [novels]{"entity": "object_type", "value": "book"}
+    - slot_was_set:
+        - object_type: book
+    - slot_was_set:
+        - genres: historic
+    - action: action_query_knowledge_base
+    - intent: know_more
+      user: |-
+        [who wrote]{"entity": "attribute", "value": "author"} the [first one]{"entity": "mention", "value": "1"}
+    - slot_was_set:
+        - mention: 1
+    - slot_was_set:
+        - attribute: author
+    - action: action_query_knowledge_base
+
+  - story: query movies and their director
+    steps:
+    - intent: query_movies
+      user: |-
+        i want to watch a [film]{"entity": "object_type", "value": "movie"} by [Christopher Nolan](director)
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - director: Christopher Nolan
+    - action: action_query_knowledge_base
+
+  - story: query movies and their director
+    steps:
+    - intent: query_movies
+      user: |-
+        list some [movies]{"entity": "object_type", "value": "movie"} by [Peter Jackson](director)
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - director: Peter Jackson
+    - action: action_query_knowledge_base
+
+  - story: query movies and their actors after 2015
+    steps:
+    - intent: query_movies
+      user: |-
+        show me [movies]{"entity": "object_type", "value": "movie"} with [Emma Watson](actors) shot [after 2015]{"entity": "publication_year", "role": "gt", "value": 2015}
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - actors: Emma Watson
+    - slot_was_set:
+        - publication_year: 2015
+    - action: action_query_knowledge_base
+
+  - story: query movies before 2000
+    steps:
+    - intent: query_movies
+      user: |-
+        show me [movies]{"entity": "object_type", "value": "movie"} shot [before 2000]{"entity": "publication_year", "role": "lt", "value": 2000}
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - publication_year: 2000
+    - action: action_query_knowledge_base
+
+  - story: query books from 2001
+    steps:
+    - intent: query_books
+      user: |-
+        show me [books]{"entity": "object_type", "value": "book"} published [in 2001]{"entity": "publication_year", "role": "eq", "value": 2001}
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - publication_year: 2001
+    - action: action_query_knowledge_base
+
+  - story: query movies from 1997
+    steps:
+    - intent: query_movies
+      user: |-
+        show me [movies]{"entity": "object_type", "value": "movie"} [from 1997]{"entity": "publication_year", "role": "eq", "value": 1997}
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - publication_year: 1997
+    - action: action_query_knowledge_base
+
+  - story: query movies from 1997
+    steps:
+    - intent: query_movies
+      user: |-
+        show me [movies]{"entity": "object_type", "value": "movie"} shot [in 1997]{"entity": "publication_year", "role": "gt", "value": 1997}
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - publication_year: 1997
+    - action: action_query_knowledge_base
+
+  - story: Story from Conversation ID 65b6da7b27ee4413827550ad21cc8b7d
+    steps:
+    - intent: query_movies
+      user: |-
+        show me [movies]{"entity": "object_type", "value": "movie"} with [Johnny Depp](actors)
+    - slot_was_set:
+        - object_type: movie
+    - slot_was_set:
+        - actors: Johnny Depp
+    - action: action_query_knowledge_base
+    - intent: know_more
+      user: |-
+        how was the [second one]{"entity": "mention", "value": "2"} [rated]{"entity": "object_type", "value": "rating"}
+    - slot_was_set:
+        - object_type: rating
+    - slot_was_set:
+        - mention: '2'
+    - action: action_query_knowledge_base
+    - intent: know_more
+      user: |-
+        please [summarize]{"entity": "attribute", "value": "summary"} it
+    - slot_was_set:
+        - attribute: summary
+    - action: action_query_knowledge_base
+

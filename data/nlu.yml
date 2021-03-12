@@ -1,0 +1,222 @@
+version: "2.0"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hey
+      - heyho
+      - hello
+      - hi
+      - good morning
+      - good evening
+      - hey there
+      - how is it going?
+
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you around
+      - see you later
+      - have a great day
+      - have a good one
+
+  - intent: query_books
+    examples: |
+      - show me [books]{"entity": "object_type", "value": "book"} by [George Orwell](author)
+      - show me [books]{"entity": "object_type", "value": "book"} by [Orwell](author)
+      - I want to know about [books]{"entity": "object_type", "value": "book"} written by [Joe Smith](author)
+      - show me [books]{"entity": "object_type", "value": "book"} written by [Haruki Murakami](author)
+      - do have [books]{"entity": "object_type", "value": "book"} authored by [Isabel Allende](author)?
+      - present me [books]{"entity": "object_type", "value": "book"} authored by [Allende](author)?
+      - can you recommend [books]{"entity": "object_type", "value": "book"} written by [J. K. Rowling]{"entity": "author", "value": "J. K. Rowling"}?
+      - I would like to read a [book]{"entity": "object_type", "value": "book"} by [Jo Nesbo](author)
+      - I would like to read a [book]{"entity": "object_type", "value": "book"} written by [Jo Nesbo](author)
+      - I need [something new to read]{"entity": "object_type", "value": "book"}. Present me something.
+      - I want to read a [book]{"entity": "object_type", "value": "book"} by [Charles Dickes](author)
+      - I want to have a [novel]{"entity": "object_type", "value": "book"} by [Stephen King](author)
+      - please recommend me [books]{"entity": "object_type", "value": "book"} written by [Tom Lewis](author)
+      - I want to read [something]{"entity": "object_type", "value": "book"} by [Charles Dickens](author)
+      - show me [fantasy](genres) [books]{"entity": "object_type", "value": "book"}
+      - display [science fiction](genres) [books]{"entity": "object_type", "value": "book"}
+      - find me some [fantasy](genres) [books]{"entity": "object_type", "value": "book"} by [Tolkien](author)
+      - i would like to read a [fantasy](genres) [novel]{"entity": "object_type", "value": "book"} by [Tolkien](author)
+      - list some [historic]{"entity": "genres", "value": "history"} [books]{"entity": "object_type", "value": "book"}
+      - show me [science fiction](genres) [books]{"entity": "object_type", "value": "book"}
+      - i want to read a [history](genres) [novel]{"entity": "object_type", "value": "book"}
+      - list [books]{"entity": "object_type", "value": "book"} written [after 2015]{"entity": "publication_year", "role": "gt", "value": 2015}
+      - list [books]{"entity": "object_type", "value": "book"} written [before 2015]{"entity": "publication_year", "role": "lt", "value": 2015}
+      - list [books]{"entity": "object_type", "value": "book"} written [in 2015]{"entity": "publication_year", "role": "eq", "value": 2015}
+      - show me [novels]{"entity": "object_type", "value": "book"} published [before 1990]{"entity": "publication_year", "role": "lt", "value": 1990}
+      - show me [novels]{"entity": "object_type", "value": "book"} published [after 1990]{"entity": "publication_year", "role": "gt", "value": 1990}
+      - provide me a [book]{"entity": "object_type", "value": "book"} from [after 2000]{"entity": "publication_year", "role": "gt", "value": 2000}
+      - provide me a [book]{"entity": "object_type", "value": "book"} from [before 2000]{"entity": "publication_year", "role": "lt", "value": 2000}
+      - provide me a [book]{"entity": "object_type", "value": "book"} from [before 2002]{"entity": "publication_year", "role": "lt", "value": 2002}
+      - show me [novels]{"entity": "object_type", "value": "book"} published [in 2020]{"entity": "publication_year", "role": "eq", "value": 2020}
+      - show me [recently]{"entity": "publication_year", "value": "NEW"} published [books]{"entity": "object_type", "value": "book"}
+
+  - intent: query_movies
+    examples: |
+      - show me [movies]{"entity": "object_type", "value": "movie"} directed by [Wes Anderson](director)
+      - do you have [movies]{"entity": "object_type", "value": "movie"} by [Quentin Tarantino] (director)
+      - I want to know about [movies]{"entity": "object_type", "value": "movie"} created by [Peter Jackson](director)
+      - list [movies]{"entity": "object_type", "value": "movie"} by [Michael Bay](director)
+      - show me [movies]{"entity": "object_type", "value": "movie"} by [Daniel Villeneuve](director)
+      - show me [movies]{"entity": "object_type", "value": "movie"} with [Ryan Gosling](actors)
+      - list [movies]{"entity": "object_type", "value": "movie"} with [Emma Stone](actors)
+      - show me [movies]{"entity": "object_type", "value": "movie"} with [Johnny Depp](actors)
+      - show me [movies]{"entity": "object_type", "value": "movie"} with [George Clooney](actors)
+      - list [movies]{"entity": "object_type", "value": "movie"} with [Tom Cruise](actors)
+      - present me some [movies]{"entity": "object_type", "value": "movie"} with [Morgan Freeman](actors)
+      - show me [movies]{"entity": "object_type", "value": "movie"} with [Daniel Craig](actors)
+      - present me [films]{"entity": "object_type", "value": "movie"} with actress [Emma Watson](actors)?
+      - can you recommend [movies]{"entity": "object_type", "value": "movie"} starring [Orlando Bloom](actors)
+      - I want to watch [something]{"entity": "object_type", "value": "movie"} with [Benedikt Cumberbatch](actors)
+      - I want to watch a [movie]{"entity": "object_type", "value": "movie"} with [Nicole Kidman](actors)
+      - show me [movies]{"entity": "object_type", "value": "movie"} with [Emma Watson](actors) and [Daniel Radcliffe](actors)
+      - list [films]{"entity": "object_type", "value": "movie"} with actors [George Clooney](actors) and [Brat Pitt](actors)
+      - show me [action](genres) [movies]{"entity": "object_type", "value": "movie"}
+      - i want to watch a [film]{"entity": "object_type", "value": "movie"} by [Christopher Nolan](director)
+      - show me movies that were shot [before 2000]{"entity": "publication_year", "role": "lt", "value": 2000}
+      - i want to watch [new]{"entity": "publication_year", "value": "NEW"} [movies]{"entity": "object_type", "value": "movie"}
+      - show me [recently]{"entity": "publication_year", "value": "NEW"} produced [movies]{"entity": "object_type", "value": "movie"}
+      - I need [something to watch]{"entity": "object_type", "value": "movie"}. Present me something.
+      - please recommend me [films]{"entity": "object_type", "value": "movie"} directed by [Martin Scorsese](director)
+      - I want to watch [something]{"entity": "object_type", "value": "movie"} directed by [Steven Spielberg](director)
+      - show me [fantasy](genres) [movies]{"entity": "object_type", "value": "movie"}
+      - display [science fiction](genres) [films]{"entity": "object_type", "value": "movie"}
+      - find me some [fantasy](genres) [movies]{"entity": "object_type", "value": "movie"} starring [Orlando Bloom](actors)
+      - i would like to watch an [action](genres) [movie]{"entity": "object_type", "value": "movie"} with actor [Elijah Wood](actors)
+      - show me [films]{"entity": "object_type", "value": "movie"} shot [after 2010]{"entity": "publication_year", "role": "gt", "value": 2010}
+      - list [movies]{"entity": "object_type", "value": "movie"} by [Martin Scorsese](director) published [after 2000]{"entity": "publication_year", "role": "gt", "value": 2000}
+      - list [movies]{"entity": "object_type", "value": "movie"} with [Elijah Wood](actors) published [after 2020]{"entity": "publication_year", "role": "gt", "value": 2020}
+      - list [movies]{"entity": "object_type", "value": "movie"} by [Martin Scorsese](director) published [in 2020]{"entity": "publication_year", "role": "eq", "value": 2020}
+      - show some [film]{"entity": "object_type", "value": "movie"} [from 1920]{"entity": "publication_year", "role": "eq", "value": 1920}
+      - list some [movies]{"entity": "object_type", "value": "movie"} with [Keira Knightley](actors)
+      - list [films]{"entity": "object_type", "value": "movie"} filmed [after 2015]{"entity": "publication_year", "role": "gt", "value": 2015}
+      - show me [movies]{"entity": "object_type", "value": "movie"} published [after 2018]{"entity": "publication_year", "role": "gt", "value": 2018}
+      - show me [movies]{"entity": "object_type", "value": "movie"} shot [after 2014]{"entity": "publication_year", "role": "gt", "value": 2014}
+      - list [movies]{"entity": "object_type", "value": "movie"} shot [before 2000]{"entity": "publication_year", "role": "lt", "value": 2000}
+      - show me [movies]{"entity": "object_type", "value": "movie"} shot [in 2020]{"entity": "publication_year", "role": "eq", "value": 2020}
+      - show me [movies]{"entity": "object_type", "value": "movie"} [from 2020]{"entity": "publication_year", "role": "eq", "value": 2020}
+      - list [films]{"entity": "object_type", "value": "movie"} [from 2010]{"entity": "publication_year", "role": "eq", "value": 2010}
+      - show me [recently]{"entity": "publication_year", "value": "NEW"} published [movies]{"entity": "object_type", "value": "movie"}
+
+  - intent: know_more
+    examples: |
+      - please give me a [summary](attribute) of the [first one]{"entity": "mention", "value": "1"}
+      - can you provide a [summary](attribute) of the [last one]{"entity": "mention", "value": "LAST"}
+      - can you [summarize]{"entity": "attribute", "value": "summary"} the [first one]{"entity": "mention", "value": "1"} for me
+      - can you [summarize]{"entity": "attribute", "value": "summary"} the [third one]{"entity": "mention", "value": "3"} for me
+      - please [summarize]{"entity": "attribute", "value": "summary"} the [second]{"entity": "mention", "value": "2"}
+      - what is [its]{"entity": "mention", "value": "it"} [story]{"entity": "attribute", "value": "summary"}
+      - what [happens in]{"entity": "attribute", "value": "summary"} the [second one]{"entity": "mention", "value": "2"}
+      - who is the [author](attribute) of the [second]{"entity": "mention", "value": "2"}
+      - [who wrote]{"entity": "attribute", "value": "author"} of the [second]{"entity": "mention", "value": "2"}
+      - [who wrote]{"entity": "attribute", "value": "author"} the [last one]{"entity": "mention", "value": "LAST"}
+      - which [genres](attribute) does the [last one]{"entity": "mention", "value": "LAST"} belong to?
+      - what are the [genres](attribute) of the [third]{"entity": "mention", "value": "3"}
+      - show me the [rating](object_type) of the [first one]{"entity": "mention", "value": "1"}
+      - how has the [last one]{"entity": "mention", "value": "LAST"} been [rated]{"entity": "object_type", "value": "rating"}
+      - how did viewers [rate]{"entity": "object_type", "value": "rating"} the [third one]{"entity": "mention", "value": "3"}
+      - how did viewers [like]{"entity": "object_type", "value": "rating"} the [fifth one]{"entity": "mention", "value": "5"}
+
+  - regex: publication_year
+    examples: |
+      - [0-9]{4}
+
+  - lookup: publication_year
+    examples: |
+      - 1950
+      - 1962
+      - 1978
+      - 2000
+      - 2002
+      - 2005
+      - 2008
+      - 2010
+      - 2012
+      - 2015
+      - 2020
+
+  - synonym: book
+    examples: |
+      - books
+      - something to read
+      - novel
+      - novels
+      - literature
+
+  - synonym: rating
+    examples: |
+      - ratings
+      - like
+      - review
+      - reviews
+      - rate
+
+  - synonym: movie
+    examples: |
+      - movies
+      - something to watch
+      - film
+      - films
+      - dvd
+      - blueray
+
+  - synonym: actors
+    examples: |
+      - actor
+      - actors
+      - starring
+      - played by
+
+  - lookup: author
+    examples: |
+      - George Orwell
+      - Orwell
+      - Patrick Rothfuss
+      - J. K. Rowling
+      - Sebastian Fitzek
+      - Fitzek
+      - Hanya Yanagihara
+      - Joe Smith
+      - Allende
+      - Luther
+      - St. Francis
+      - Scott Fitzgerald
+
+  - lookup: director
+    examples: |
+      - Peter Jackson
+      - Quentin Tarantino
+      - Wes Anderson
+      - Christopher Nolan
+      - Martin Scorsese
+
+  - lookup: actors
+    examples: |
+      - Johnny Depp
+      - Leonardo DiCaprio
+      - Martin Freeman
+      - Keira Knightley
+      - Rachel Brosnahan
+
+  - lookup: genres
+    examples: |
+      - science fiction
+      - non-fiction
+      - romance
+      - fantasy
+      - history
+      - satire
+      - fiction
+      - novella
+      - novel
+
+  - lookup: attribute
+    examples: |
+      - author
+      - summary
+      - publication year
+      - genres
