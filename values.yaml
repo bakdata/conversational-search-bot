@@ -13,7 +13,7 @@ rasax:
     tag: "0.32.2"
 # rasa: Settings common for all Rasa containers
 rasa:
-    tag: "2.0.0"
+    tag: "2.4.0"
     # token Rasa accepts as authentication token from other Rasa services
     token: "123456"
 # RabbitMQ specific settings
