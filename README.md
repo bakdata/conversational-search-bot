@@ -1,8 +1,21 @@
-# chatbot-demo
+# Conversational Search Bot
+
+This is the code repo for a conversational search bot for book and movie recommendations. 
+It enables natural language queries against Elasticsearch.
+
+Read the accompanying blogpost here ...
+
+## Useful commands
 
 Train model
 
 `rasa train`
+
+To use Spacy models
+
+`pip install spacy`
+`python -m spacy download en_core_web_md`
+`python -m spacy link en_core_web_md en`
 
 Run action server locally
 
@@ -16,7 +29,7 @@ Run action server from PyCharm
 
 Run rasa shell
 
-`rasa shell`
+`rasa shell` or `rasa shell nlu`
 
 Run tests
 
@@ -39,8 +52,3 @@ Add rasa helm repo
 Install on local Kubernetes
 
 `helm install --namespace rasa --values ./values.yaml rasa-demo rasa-x/rasa-x`
-
-Use Spacy models
-`pip install spacy`
-`python -m spacy download en_core_web_md`
-`python -m spacy link en_core_web_md en`
