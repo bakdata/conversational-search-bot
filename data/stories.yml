@@ -31,7 +31,7 @@ stories:
       - attribute: summary
     - action: action_query_knowledge_base
 
-  - story: Story from Conversation ID fed7b8c4f9d649838e6e8e4f8db76e9d
+  - story: query book by author
     steps:
     - intent: greet
     - action: utter_greet
@@ -56,7 +56,7 @@ stories:
       - slot_was_set:
           - object_type: movie
       - slot_was_set:
-          - author: Scott Fitzgerald
+          - director: Peter Jackson
       - action: action_query_knowledge_base
       - intent: know_more
       - slot_was_set:
@@ -87,8 +87,12 @@ stories:
           - actors: Martin Freeman
       - slot_was_set:
           - object_type: movie
+      - slot_was_set:
+          - actors: Martin Freeman
       - action: action_query_knowledge_base
       - intent: know_more
+        entities:
+            - attribute: author
       - slot_was_set:
           - attribute: summary
       - action: action_query_knowledge_base
@@ -102,6 +106,8 @@ stories:
           - object_type: book
       - action: action_query_knowledge_base
       - intent: know_more
+        entities:
+          - attribute: author
       - slot_was_set:
           - attribute: author
       - action: action_query_knowledge_base
