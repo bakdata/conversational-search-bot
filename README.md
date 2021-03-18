@@ -13,9 +13,11 @@ Train model
 
 To use Spacy models
 
-`pip install spacy`
-`python -m spacy download en_core_web_md`
-`python -m spacy link en_core_web_md en`
+```
+pip install spacy
+python -m spacy download en_core_web_md
+python -m spacy link en_core_web_md en
+```
 
 Run action server locally
 
