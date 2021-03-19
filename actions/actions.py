@@ -18,7 +18,7 @@ from rasa_sdk.knowledge_base.utils import SLOT_OBJECT_TYPE, SLOT_ATTRIBUTE, \
     SLOT_MENTION, SLOT_LAST_OBJECT, SLOT_LISTED_OBJECTS, get_object_name
 from rasa_sdk.types import DomainDict
 
-from actions.storage import Attribute, DefaultAttribute, DocumentType, \
+from actions.storage import DefaultAttribute, DocumentType, \
     ElasticsearchKnowledgeBase, RangeAttribute, TextAttribute
 
 logger = logging.getLogger(__name__)
@@ -74,10 +74,11 @@ def sanitize(text: Text) -> Text:
 
 
 def get_attribute_slots(
-    tracker: "Tracker", object_attributes: List[Text]
+        tracker: "Tracker", object_attributes: List[Text]
 ) -> List[Dict[Text, Text]]:
     """
-    Overridden as we also need to return the entity role for range queries.
+    Copied from rasa_sdk.knowledge_base.utils  and overridden
+    as we also need to return the entity role for range queries.
 
     If the user mentioned one or multiple attributes of the provided object_type in
     an utterance, we extract all attribute values from the tracker and put them
@@ -130,10 +131,10 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
         super().__init__(knowledge_base)
 
     async def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: "DomainDict",
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: "DomainDict",
     ) -> List[Dict[Text, Any]]:
         """
         Copied from ActionQueryKnowledgeBase and overridden because we
@@ -181,8 +182,8 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
         return []
 
     async def _query_objects(
-        self, dispatcher: CollectingDispatcher, object_type: Text,
-        tracker: Tracker
+            self, dispatcher: CollectingDispatcher, object_type: Text,
+            tracker: Tracker
     ) -> List[Dict]:
         """
         Copied from ActionQueryKnowledgeBase and overridden
@@ -245,11 +246,11 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
         return slots + reset_attribute_slots(tracker, object_attributes)
 
     async def utter_objects(
-        self,
-        dispatcher: CollectingDispatcher,
-        object_type: Text,
-        objects: List[Dict[Text, Any]],
-        attributes: List[Dict[Text, Text]] = None,
+            self,
+            dispatcher: CollectingDispatcher,
+            object_type: Text,
+            objects: List[Dict[Text, Any]],
+            attributes: List[Dict[Text, Text]] = None,
     ):
         """
         Utters a response to the user that lists all found objects.
@@ -259,7 +260,7 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
             object_type: the object type
             objects: the list of objects
         """
-        attributes_repr = f" with {', '.join([attribute['name'] + ': '  + attribute['value'] for attribute in attributes])}" if attributes else ""
+        attributes_repr = f" with {', '.join([attribute['name'] + ': ' + attribute['value'] for attribute in attributes])}" if attributes else ""
         if objects:
             dispatcher.utter_message(
                 text=f"I found the following {object_type}s {attributes_repr}:"
@@ -277,11 +278,11 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
             )
 
     def utter_attribute_value(
-        self,
-        dispatcher: CollectingDispatcher,
-        object_name: Text,
-        attribute_name: Text,
-        attribute_value: Text,
+            self,
+            dispatcher: CollectingDispatcher,
+            object_name: Text,
+            attribute_name: Text,
+            attribute_value: Text,
     ):
         """
         Utters a response that informs the user about the attribute value of the
@@ -304,9 +305,9 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
 
     async def _query_join_objects(self, dispatcher: CollectingDispatcher, object_type: Text, last_object_type, tracker: Tracker) -> List[Dict]:
         """
-        Queries the knowledge base for objects of the requested object type and
-        outputs those to the user. The objects are filtered by any attribute the
-        user mentioned in the request.
+        Performs a join query on the knowledge base
+        by returning the object of type 'object_type'
+        where the key attribute matches the key of the last object in the tracker.
 
         Args:
             dispatcher: the dispatcher
@@ -314,9 +315,6 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
 
         Returns: list of slots
         """
-        object_attributes = await utils.call_potential_coroutine(
-            self.knowledge_base.get_attributes_of_object(object_type)
-        )
 
         object_name = get_object_name(
             tracker,
