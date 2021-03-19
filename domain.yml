@@ -11,8 +11,8 @@ intents:
     use_entities: true
 - query_books:
     ignore_entities:
-    - actors
     - director
+    - actors
 - query_movies:
     ignore_entities:
     - author

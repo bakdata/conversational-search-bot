@@ -38,6 +38,7 @@ def generate_match_query(attribute: Text, value: Text) -> Dict:
         }
     }
 
+
 def generate_match_phrase_query(attribute: Text, value: Text) -> Dict:
     return {
         "match_phrase": {
@@ -71,6 +72,7 @@ class DefaultAttribute(Attribute):
 
 
 class TextAttribute(DefaultAttribute):
+
     def generate_query(self, value: Text, role: Text) -> Dict:
         return generate_match_phrase_query(self._name, value)
 
@@ -96,13 +98,17 @@ class DocumentType(ABC):
 
 
 class ElasticsearchKnowledgeBase(KnowledgeBase):
+
     def __init__(self, document_types: Dict[Text, DocumentType],
-        es: Elasticsearch) -> None:
+                 es: Elasticsearch) -> None:
         self.document_types: Dict[Text, DocumentType] = document_types
         self.es = es
         super().__init__()
 
     def to_kb_obj(self, obj, object_type: Text) -> Dict[Text, Any]:
+        """
+        Converts ES query results to Rasa knowledge base objects
+        """
         source = obj["_source"]
         document_type = self.document_types[object_type]
         pretty = document_type.to_string(source)
@@ -122,8 +128,8 @@ class ElasticsearchKnowledgeBase(KnowledgeBase):
                 self.document_types[object_type].attributes.keys()]
 
     async def get_objects(
-        self, object_type: Text, attributes: List[Dict[Text, Text]],
-        limit: int = 5
+            self, object_type: Text, attributes: List[Dict[Text, Text]],
+            limit: int = 5
     ) -> List[Dict[Text, Any]]:
         if object_type not in self.document_types:
             return []
@@ -148,7 +154,7 @@ class ElasticsearchKnowledgeBase(KnowledgeBase):
         return [self.to_kb_obj(hit, object_type) for hit in res['hits']['hits']]
 
     async def get_object(
-        self, object_type: Text, object_identifier: Text
+            self, object_type: Text, object_identifier: Text
     ) -> Optional[Dict[Text, Any]]:
         if object_type not in self.document_types:
             return None
