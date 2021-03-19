@@ -28,6 +28,7 @@ Run action server from PyCharm
 - New Python run configuration
 - Module name: `rasa_sdk`
 - Parameters: `--actions actions`
+- ENV vars `ES_HOST`, `ES_USERNAME`, `ES_PASSWORD` must be set
 
 Run rasa shell
 
