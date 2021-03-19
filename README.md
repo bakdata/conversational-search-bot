@@ -3,7 +3,7 @@
 This is the code repo for a conversational search bot for book and movie recommendations. 
 It enables natural language queries against Elasticsearch.
 
-Read the accompanying blogpost here ...
+Read the accompanying blogpost [here](https://medium.com/bakdata/conversational-search-in-knowledge-bases-using-nlp-nlu-and-chatbots-d84f74c09396).
 
 ## Useful commands
 
