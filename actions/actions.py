@@ -295,7 +295,7 @@ class ActionElasticsearchKnowledgeBase(ActionQueryKnowledgeBase):
         """
         if attribute_value:
             dispatcher.utter_message(
-                text=f"{sanitize(str(attribute_value))}."
+                text=f"The {attribute_name} of \"{object_name}\" is \n\n \"{sanitize(str(attribute_value))}\"."
             )
         else:
             dispatcher.utter_message(
