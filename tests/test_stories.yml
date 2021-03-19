@@ -173,7 +173,7 @@ stories:
         - publication_year: 1997
     - action: action_query_knowledge_base
 
-  - story: Story from Conversation ID 65b6da7b27ee4413827550ad21cc8b7d
+  - story: query movie, get rating and summary
     steps:
     - intent: query_movies
       user: |-

@@ -1,6 +1,7 @@
 # Datasets
 
 [Book dataset](http://www.cs.cmu.edu/~dbamman/booksummaries.html) (David Bamman and Noah Smith (2013), "New Alignment Methods for Discriminative Book Summarization")
+
 [Movie dataset](https://www.kaggle.com/stefanoleone992/imdb-extensive-dataset?select=IMDb+movies.csv) (movies and ratings)
 
 To index the data in elasticsearch run the [notebook](./create_elastic_jsons.ipynb).
