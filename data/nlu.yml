@@ -187,6 +187,8 @@ nlu:
       - Scott Fitzgerald
 
   - lookup: director
+#    Use lookup table from file:
+#    - datasets/directors.txt
     examples: |
       - Peter Jackson
       - Quentin Tarantino
@@ -195,6 +197,8 @@ nlu:
       - Martin Scorsese
 
   - lookup: actors
+#    Use lookup table from file:
+#    - datasets/actors.txt
     examples: |
       - Johnny Depp
       - Leonardo DiCaprio
