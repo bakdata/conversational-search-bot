@@ -1,0 +1,19 @@
+name: Build and push action server package
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build_docker_image:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Build an action server
+        uses: RasaHQ/rasa-action-server-gha@main
+        with:
+          docker_image_name:  ${{ github.repository }}/action_server
+          docker_registry: docker.pkg.github.com
+          docker_registry_login: ${{ github.actor }}
+          docker_registry_password: ${{ secrets.GITHUB_TOKEN }}
